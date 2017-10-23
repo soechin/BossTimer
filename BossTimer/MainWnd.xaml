@@ -1,0 +1,102 @@
+﻿<Window x:Class="BossTimer.MainWnd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BossTimer"
+        mc:Ignorable="d"
+        Title="BossTimer"
+        Width="320"
+        ResizeMode="CanMinimize"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed"
+        StateChanged="Window_StateChanged">
+    <StackPanel>
+        <GroupBox Header="克價卡">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="上次吼叫時間:"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Name="TimeA1"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Name="RemA"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeA2"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="庫屯">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="上次吼叫時間:"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Name="TimeB1"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Name="RemB"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeB2"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="卡嵐達">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="上次吼叫時間:"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Name="TimeC1"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Name="RemC"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeC2"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="羅裴勒">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="上次吼叫時間:"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Name="TimeD1"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Name="RemD"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
+                <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeD2"/>
+            </Grid>
+        </GroupBox>
+    </StackPanel>
+</Window>
