@@ -222,14 +222,21 @@ namespace BossTimer
             DateTime now;
             double max;
 
-            request = (HttpWebRequest)WebRequest.Create(model.url);
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            try
             {
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                request = (HttpWebRequest)WebRequest.Create(model.url);
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
                 {
-                    text = reader.ReadToEnd();
+                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                    {
+                        text = reader.ReadToEnd();
+                    }
                 }
+            }
+            catch (WebException)
+            {
+                return;
             }
 
             json = JsonConvert.DeserializeObject<BossJson>(text);
