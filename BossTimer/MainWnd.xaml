@@ -14,7 +14,7 @@
         Closed="Window_Closed"
         StateChanged="Window_StateChanged">
     <StackPanel>
-        <GroupBox Header="克價卡">
+        <GroupBox Name="GroupA">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -33,9 +33,11 @@
                 <TextBlock Grid.Row="0" Grid.Column="4" Name="RemA"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeA2"/>
+                <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableA"
+                          Checked="Enable_Changed" Unchecked="Enable_Changed"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="庫屯">
+        <GroupBox Name="GroupB">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -54,9 +56,11 @@
                 <TextBlock Grid.Row="0" Grid.Column="4" Name="RemB"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeB2"/>
+                <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableB"
+                           Checked="Enable_Changed" Unchecked="Enable_Changed"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="卡嵐達">
+        <GroupBox Name="GroupC">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -75,9 +79,11 @@
                 <TextBlock Grid.Row="0" Grid.Column="4" Name="RemC"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeC2"/>
+                <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableC"
+                           Checked="Enable_Changed" Unchecked="Enable_Changed"/>
             </Grid>
         </GroupBox>
-        <GroupBox Header="羅裴勒">
+        <GroupBox Name="GroupD">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -96,6 +102,8 @@
                 <TextBlock Grid.Row="0" Grid.Column="4" Name="RemD"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeD2"/>
+                <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableD"
+                           Checked="Enable_Changed" Unchecked="Enable_Changed"/>
             </Grid>
         </GroupBox>
     </StackPanel>

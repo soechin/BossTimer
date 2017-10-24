@@ -51,43 +51,51 @@ namespace BossTimer
             {
                 new BossModel
                 {
-                    name = "克價卡",
                     url = "http://bd.youxidudu.com/tools/clock/clock_boss_time.php?cid=200",
+                    group = GroupA,
                     timeText1 = TimeA1,
                     timeText2 = TimeA2,
                     remText = RemA,
+                    enableCheck = EnableA,
                     span1 = TimeSpan.FromHours(8),
                     span2 = TimeSpan.FromHours(12),
+                    enable = EnableA.IsChecked.Value,
                 },
                 new BossModel
                 {
-                    name = "庫屯",
                     url = "http://bd.youxidudu.com/tools/clock/clock_boss_time.php?cid=250",
+                    group = GroupB,
                     timeText1 = TimeB1,
                     timeText2 = TimeB2,
                     remText = RemB,
+                    enableCheck = EnableB,
                     span1 = TimeSpan.FromHours(9),
                     span2 = TimeSpan.FromHours(13),
+                    enable = EnableB.IsChecked.Value,
                 },
                 new BossModel
                 {
-                    name = "卡嵐達",
                     url = "http://bd.youxidudu.com/tools/clock/clock_boss_time.php?cid=251",
+                    group = GroupC,
                     timeText1 = TimeC1,
                     timeText2 = TimeC2,
                     remText = RemC,
+                    enableCheck = EnableC,
                     span1 = TimeSpan.FromHours(14),
                     span2 = TimeSpan.FromHours(18),
+                    enable = EnableC.IsChecked.Value,
                 },
                 new BossModel
                 {
-                    name = "羅斐勒",
                     url = "http://bd.youxidudu.com/tools/clock/clock_boss_time.php?cid=252",
+                    group = GroupD,
                     timeText1 = TimeD1,
                     timeText2 = TimeD2,
                     remText = RemD,
+                    enableCheck = EnableD,
                     span1 = TimeSpan.FromHours(8),
                     span2 = TimeSpan.FromHours(12),
+                    enable = EnableD.IsChecked.Value,
                 }
             };
 
@@ -149,7 +157,12 @@ namespace BossTimer
                 {
                     rem = now - last;
 
-                    if (rem > span1)
+                    if (!model.enable)
+                    {
+                        last = now;
+                        rem = TimeSpan.Zero;
+                    }
+                    else if (rem > span1)
                     {
                         last = now;
                         action = true;
@@ -161,7 +174,12 @@ namespace BossTimer
                 {
                     rem = now - last;
 
-                    if (rem > span2)
+                    if (!model.enable)
+                    {
+                        last = now;
+                        rem = TimeSpan.Zero;
+                    }
+                    else if (rem > span2)
                     {
                         last = now;
                         action = true;
@@ -216,6 +234,9 @@ namespace BossTimer
 
             json = JsonConvert.DeserializeObject<BossJson>(text);
 
+            // name
+            model.name = json.boss_name;
+
             // guess year
             now = DateTime.Now;
             max = double.MaxValue;
@@ -238,6 +259,7 @@ namespace BossTimer
 
         private void UpdateUI(BossModel model)
         {
+            model.group.Header = model.name;
             model.timeText1.Text = model.time1.ToString(@"HH\:mm");
             model.timeText2.Text = model.time2.ToString(@"HH\:mm") + " - " +
                 model.time3.ToString(@"HH\:mm");
@@ -252,6 +274,15 @@ namespace BossTimer
             Title = m_title + ": " + text;
             FlashWindow(m_hwnd, true);
         }
+
+        private void Enable_Changed(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < m_models.Length; i++)
+            {
+                BossModel model = m_models[i];
+                model.enable = model.enableCheck.IsChecked.Value;
+            }
+        }
     }
 
     class BossJson
@@ -263,17 +294,20 @@ namespace BossTimer
 
     class BossModel
     {
-        public string name { get; set; }
-        public string url { get; set; }
-        public TextBlock timeText1 { get; set; }
-        public TextBlock timeText2 { get; set; }
-        public TextBlock remText { get; set; }
+        public string name;
+        public string url;
+        public GroupBox group;
+        public TextBlock timeText1;
+        public TextBlock timeText2;
+        public TextBlock remText;
+        public CheckBox enableCheck;
         public DateTime time1;
         public DateTime time2;
         public DateTime time3;
         public TimeSpan span1;
         public TimeSpan span2;
         public TimeSpan rem;
+        public bool enable;
         public Thread thread;
         public volatile bool running;
     }
