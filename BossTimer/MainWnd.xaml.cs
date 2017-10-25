@@ -123,6 +123,8 @@ namespace BossTimer
                 if (model.thread != null) model.thread.Join();
                 model.thread = null;
             }
+
+            m_speech.SpeakAsyncCancelAll();
         }
 
         private void Window_StateChanged(object sender, EventArgs e)
@@ -276,7 +278,8 @@ namespace BossTimer
         private void PlayVoice(String text)
         {
             Beep(1000, 1000);
-            m_speech.Speak(text);
+            m_speech.SpeakAsyncCancelAll();
+            m_speech.SpeakAsync(text);
 
             Title = m_title + ": " + text;
             FlashWindow(m_hwnd, true);
@@ -287,7 +290,17 @@ namespace BossTimer
             for (int i = 0; i < m_models.Length; i++)
             {
                 BossModel model = m_models[i];
-                model.enable = model.enableCheck.IsChecked.Value;
+
+                if (sender == model.enableCheck)
+                {
+                    model.enable = model.enableCheck.IsChecked.Value;
+
+                    if (model.enable)
+                    {
+                        m_speech.SpeakAsyncCancelAll();
+                        m_speech.SpeakAsync(model.name);
+                    }
+                }
             }
         }
     }
