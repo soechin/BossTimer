@@ -36,7 +36,6 @@ namespace BossTimer
         public static extern bool FlashWindow(IntPtr hWnd, [MarshalAs(UnmanagedType.Bool)] bool bInvert);
 
         private BossModel[] m_models;
-        private SpeechSynthesizer m_speech;
         private IntPtr m_hwnd;
         private string m_title;
 
@@ -99,7 +98,6 @@ namespace BossTimer
                 }
             };
 
-            m_speech = new SpeechSynthesizer();
             m_hwnd = new WindowInteropHelper(this).Handle;
             m_title = Title;
 
@@ -123,8 +121,6 @@ namespace BossTimer
                 if (model.thread != null) model.thread.Join();
                 model.thread = null;
             }
-
-            m_speech.SpeakAsyncCancelAll();
         }
 
         private void Window_StateChanged(object sender, EventArgs e)
@@ -144,12 +140,6 @@ namespace BossTimer
             span1 = TimeSpan.FromSeconds(180);
             span2 = TimeSpan.FromSeconds(10);
 
-            UpdateModel(model);
-            Dispatcher.BeginInvoke(new Action(delegate
-            {
-                UpdateUI(model);
-            }));
-
             while (model.running)
             {
                 now = DateTime.Now;
@@ -161,7 +151,7 @@ namespace BossTimer
 
                     if (!model.enable)
                     {
-                        last = now;
+                        last = DateTime.MinValue;
                         rem = TimeSpan.Zero;
                     }
                     else if (rem > span1)
@@ -178,7 +168,7 @@ namespace BossTimer
 
                     if (!model.enable)
                     {
-                        last = now;
+                        last = DateTime.MinValue;
                         rem = TimeSpan.Zero;
                     }
                     else if (rem > span2)
@@ -268,21 +258,36 @@ namespace BossTimer
 
         private void UpdateUI(BossModel model)
         {
-            model.group.Header = model.name;
-            model.timeText1.Text = model.time1.ToString(@"HH\:mm");
-            model.timeText2.Text = model.time2.ToString(@"HH\:mm") + " - " +
-                model.time3.ToString(@"HH\:mm");
-            model.remText.Text = model.rem.ToString(@"mm\:ss");
+            if (model.enable)
+            {
+                model.timeText1.Text = model.time1.ToString(@"HH\:mm");
+                model.timeText2.Text = model.time2.ToString(@"HH\:mm") + " - " +
+                    model.time3.ToString(@"HH\:mm");
+                model.remText.Text = model.rem.ToString(@"mm\:ss");
+            }
+            else
+            {
+                model.timeText1.Text = string.Empty;
+                model.timeText2.Text = string.Empty;
+                model.remText.Text = string.Empty;
+            }
         }
 
         private void PlayVoice(String text)
         {
-            Beep(1000, 1000);
-            m_speech.SpeakAsyncCancelAll();
-            m_speech.SpeakAsync(text);
-
             Title = m_title + ": " + text;
             FlashWindow(m_hwnd, true);
+
+            new Thread(new ThreadStart(delegate
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    Beep(500, 200);
+                    Beep(750, 200);
+                    Beep(1000, 500);
+                    Thread.Sleep(500);
+                }
+            })).Start();
         }
 
         private void Enable_Changed(object sender, RoutedEventArgs e)
@@ -291,15 +296,9 @@ namespace BossTimer
             {
                 BossModel model = m_models[i];
 
-                if (sender == model.enableCheck)
+                if (model.enableCheck == sender)
                 {
                     model.enable = model.enableCheck.IsChecked.Value;
-
-                    if (model.enable)
-                    {
-                        m_speech.SpeakAsyncCancelAll();
-                        m_speech.SpeakAsync(model.name);
-                    }
                 }
             }
         }

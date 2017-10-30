@@ -14,7 +14,7 @@
         Closed="Window_Closed"
         StateChanged="Window_StateChanged">
     <StackPanel>
-        <GroupBox Name="GroupA">
+        <GroupBox Name="GroupA" Header="克價卡">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -34,10 +34,11 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeA2"/>
                 <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableA"
-                          Checked="Enable_Changed" Unchecked="Enable_Changed"/>
+                          Checked="Enable_Changed" Unchecked="Enable_Changed"
+                          HorizontalAlignment="Right"/>
             </Grid>
         </GroupBox>
-        <GroupBox Name="GroupB">
+        <GroupBox Name="GroupB" Header="庫屯">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -57,10 +58,11 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeB2"/>
                 <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableB"
-                           Checked="Enable_Changed" Unchecked="Enable_Changed"/>
+                          Checked="Enable_Changed" Unchecked="Enable_Changed"
+                          HorizontalAlignment="Right"/>
             </Grid>
         </GroupBox>
-        <GroupBox Name="GroupC">
+        <GroupBox Name="GroupC" Header="卡嵐達">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -80,10 +82,11 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeC2"/>
                 <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableC"
-                           Checked="Enable_Changed" Unchecked="Enable_Changed"/>
+                          Checked="Enable_Changed" Unchecked="Enable_Changed"
+                          HorizontalAlignment="Right"/>
             </Grid>
         </GroupBox>
-        <GroupBox Name="GroupD">
+        <GroupBox Name="GroupD" Header="羅裴勒">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -103,7 +106,8 @@
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="預計本次吼叫:"/>
                 <TextBlock Grid.Row="2" Grid.Column="2" Name="TimeD2"/>
                 <CheckBox Grid.Row="2" Grid.Column="4" Name="EnableD"
-                           Checked="Enable_Changed" Unchecked="Enable_Changed"/>
+                          Checked="Enable_Changed" Unchecked="Enable_Changed"
+                          HorizontalAlignment="Right"/>
             </Grid>
         </GroupBox>
     </StackPanel>
